@@ -1,0 +1,9 @@
+pyrogram
+tgcrypto
+requests
+python-dotenv
+curl_cffi
+fake_useragent
+fastapi
+uvicorn
+jinja2
