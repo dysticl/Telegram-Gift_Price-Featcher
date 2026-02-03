@@ -17,8 +17,19 @@ def main():
     print("Starting Telethon Client for Login...")
     client = TelegramClient(SESSION_NAME, int(API_ID), API_HASH)
     
-    # This will trigger the interactive login flow
-    client.start()
+    # We define a function for the password that shows what you type
+    # This helps if 'getpass' (hidden input) is causing issues in your terminal
+    def get_password_visible():
+        return input("Bitte gib dein 2FA Passwort ein (Eingabe ist sichtbar): ")
+
+    def get_phone_visible():
+        return input("Bitte gib deine Telefonnummer ein (z.B. +49...): ")
+    
+    def get_code_visible():
+        return input("Bitte gib den Telegram-Code ein: ")
+
+    # This will trigger the interactive login flow with our custom inputs
+    client.start(phone=get_phone_visible, password=get_password_visible, code_callback=get_code_visible)
     
     print("\nSUCCESS! You are now logged in.")
     print(f"Session file '{SESSION_NAME}.session' created.")

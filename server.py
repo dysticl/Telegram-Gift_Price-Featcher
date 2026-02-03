@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import uvicorn
 import asyncio
+import os
 from typing import List, Dict
 
 # Import our fetcher modules
@@ -25,9 +26,12 @@ CACHE = {
 
 @app.on_event("startup")
 async def startup_event():
-    # Start the Pyrogram client
-    # Note: This might require CLI interaction if session is missing!
-    # But since we ran `main.py` before, session should be there.
+    # Check for MOCK_MODE
+    if os.getenv("MOCK_MODE") == "true":
+        print("!!! RUNNING IN MOCK MODE !!! No Telegram connection required.")
+        return
+
+    # Start the Telethon client
     try:
         await gift_service.ensure_started()
     except Exception as e:
@@ -43,6 +47,37 @@ async def read_root():
 
 @app.get("/api/portfolio")
 async def get_portfolio():
+    # MOCK MODE DATA
+    if os.getenv("MOCK_MODE") == "true":
+        return {
+            "total_value_ton": 1250.5,
+            "total_items": 4,
+            "gifts": [
+                {
+                    "name": "Toy Bear",
+                    "details": "Wizard",
+                    "image_url": "https://cache.tonapi.io/imgproxy/b2a7eb46522c0926d2d46816027d14df2011158d/aHR0cHM6Ly9uZnQudG9uZGlhbW9uZHMuY29tL25ZnQtZ2lmdHMvYXBpL3YxL3RvbnBsYW5ldC9naWZ0cy8xL2ltYWdl.webp", # Real toy bear url example
+                    "price": 50.0,
+                    "num": 1337
+                },
+                {
+                    "name": "Lunar Snake",
+                    "details": "Albino (1.5%)",
+                    "image_url": "https://cache.tonapi.io/imgproxy/4e6221f75960000a6230894ff9c687e35759ce91/aHR0cHM6Ly9uZnQudG9uZGlhbW9uZHMuY29tL25ZnQtZ2lmdHMvYXBpL3YxL3RvbnBsYW5ldC9naWZ0cy8yL2ltYWdl.webp", # Real snake url example
+                    "price": 1200.5,
+                    "num": 42
+                },
+                 {
+                    "name": "Star",
+                    "details": "Meteor",
+                    "image_url": "", 
+                    "price": 0,
+                    "num": 99999
+                }
+            ],
+            "debug_prices": {"Mock": "True"}
+        }
+
     # 1. Fetch Gifts
     # We try to use cached data if fresh enough (TODO), for now fetch fresh
     try:
