@@ -20,7 +20,7 @@ A sophisticated Telegram Bot that calculates the real-time market value of a use
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/YOUR_USERNAME/Telegram-Gift-Price-Fetcher.git
+git clone https://github.com/dysticl/Telegram-Gift-Price-Fetcher.git
 cd Telegram-Gift-Price-Fetcher
 python3 -m venv venv
 source venv/bin/activate
