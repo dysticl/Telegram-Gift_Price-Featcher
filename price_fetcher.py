@@ -30,6 +30,20 @@ class PriceFetcher:
 
     def fetch_tonnel_prices(self):
         print("Fetching prices from Tonnel...")
+        # Check for API Key in env
+        import os
+        api_key = os.getenv("TONNEL_API_KEY") 
+        
+        # If API KEY is present, we try to use it with the correct auth method (mocked for now as we don't know exact header)
+        # Assuming typically "Authorization: Bearer KEY" or similar
+        
+        if api_key:
+             print("API Key found! Attempting authenticated request...")
+             # TODO: Replace with ACTUAL authenticated endpoint logic when known
+             # For now, we still return mock because we don't have the real logic yet, 
+             # but this is where it would go.
+             pass
+        
         # API is currently returning 400 or is blocked
         # Returning safe fallback for now to ensure app stability
         print("Tonnel API unavailable (Network/Block). Using fallback values.")

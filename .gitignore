@@ -36,3 +36,8 @@ yarn-error.log*
 dist/
 build/
 out/
+
+# Telethon/Pyrogram Sessions (CRITICAL SECURITY)
+*.session
+*.session-journal
+session_*.session
