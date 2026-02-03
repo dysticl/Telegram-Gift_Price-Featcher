@@ -3,7 +3,7 @@
 A sophisticated Telegram Bot that calculates the real-time market value of a user's Telegram Gift portfolio using direct market data from **Portals.to**.
 
 **Language:** Python 🐍  
-**Interface:** Russian 🇷🇺 (Telegram Bot)  
+**Interface:** Russian  (Telegram Bot)  
 **Core Libs:** `Telethon`, `aportalsmp`, `asyncio`
 
 ---
